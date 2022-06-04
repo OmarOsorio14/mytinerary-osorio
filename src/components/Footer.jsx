@@ -1,4 +1,4 @@
-import '../styles/App.css';
+import React from "react";
 import logo from '../assets/full_logo.svg'
 
 function Footer() {
@@ -26,13 +26,19 @@ function Footer() {
                 </ul>
             </div>
             <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Pages</h2>
                 <ul className="text-gray-600 dark:text-gray-400">
                     <li className="mb-4">
-                        <a href="/" className="hover:underline">Privacy Policy</a>
+                        <a href="/" className="hover:underline">Home</a>
                     </li>
                     <li>
-                        <a href="/" className="hover:underline">Terms &amp; Conditions</a>
+                        <a href="/" className="hover:underline">Cities</a>
+                    </li>
+										<li>
+                        <a href="/" className="hover:underline">Log In</a>
+                    </li>
+										<li>
+                        <a href="/" className="hover:underline">Sign Up</a>
                     </li>
                 </ul>
             </div>
