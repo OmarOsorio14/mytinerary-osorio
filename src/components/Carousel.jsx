@@ -3,8 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "./Card";
+import "../styles/arrow.css"
 
-export default function Carousel() {
+export default function Carousel({title}) {
 	let data = [{
 		city: "Tokyo",
 		country: "Japan",
@@ -79,8 +80,9 @@ export default function Carousel() {
 		rows: 2
   };
   return (
-		<div className="m-14">
-			<Slider {...settings}>
+		<div className="px-14 pb-14 bg-amber-100">
+			<h2 className="text-4xl md:text-7xl font-bold py-6">{title}</h2>
+			<Slider {...settings} className="p-4">
 				{data.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image}/>)}
     	</Slider>
 		</div>
