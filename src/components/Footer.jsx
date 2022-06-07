@@ -1,19 +1,26 @@
 import React from "react";
 import logo from '../assets/full_logo.svg'
+import {Link as LinkRouter} from "react-router-dom"
+
 
 function Footer() {
   return (
 		<footer className="p-4 sm:p-6 bg-gray-800">
     <div className="md:flex md:justify-between">
-        <div class="mb-6 md:mb-0"> 
-          <img src={logo} className="mr-3 h-20" alt="FlowBite Logo" />
+        <div className="mb-6 md:mb-0">
+					<LinkRouter to="/">
+          	<img src={logo} className="mr-3 h-20" alt="MyTinerary" />
+					</LinkRouter>
         </div>
         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
                 <h2 className="mb-6 text-sm font-semibold uppercase text-white">Resources</h2>
                 <ul className="text-gray-400">
                     <li>
-                        <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                        <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer" className="hover:underline">Tailwind CSS</a>
+                    </li>
+										<li>
+                        <a href="https://www.npmjs.com/package/react-slick" target="_blank" rel="noreferrer" className="hover:underline">React-slick</a>
                     </li>
                 </ul>
             </div>
@@ -21,7 +28,7 @@ function Footer() {
                 <h2 className="mb-6 text-sm font-semibold uppercase text-white">Follow Me</h2>
                 <ul className="text-gray-400">
                     <li className="mb-4">
-                        <a href="https://github.com/OmarOsorio14" className="hover:underline ">Github</a>
+                        <a href="https://github.com/OmarOsorio14" target="_blank" rel="noreferrer" className="hover:underline ">Github</a>
                     </li>
                 </ul>
             </div>
@@ -29,16 +36,16 @@ function Footer() {
                 <h2 className="mb-6 text-sm font-semibold uppercase text-white">Pages</h2>
                 <ul className="text-gray-400">
                     <li className="mb-4">
-                        <a href="/" className="hover:underline">Home</a>
+                        <LinkRouter to="/" className="hover:underline">Home</LinkRouter>
                     </li>
                     <li>
-                        <a href="/" className="hover:underline">Cities</a>
+                        <LinkRouter to="/cities" className="hover:underline">Cities</LinkRouter>
                     </li>
 										<li>
-                        <a href="/" className="hover:underline">Log In</a>
+                        <LinkRouter to="/logIn" className="hover:underline">Log In</LinkRouter>
                     </li>
 										<li>
-                        <a href="/" className="hover:underline">Sign Up</a>
+                        <LinkRouter to="/singUp" className="hover:underline">Sign Up</LinkRouter>
                     </li>
                 </ul>
             </div>

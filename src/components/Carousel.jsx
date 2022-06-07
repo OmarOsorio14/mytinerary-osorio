@@ -27,7 +27,7 @@ export default function Carousel({title}) {
 		image: "https://images.pexels.com/photos/3566187/pexels-photo-3566187.jpeg", 
 	},
 	{
-		city: "Reikiavik",
+		city: "Reykjavik",
 		country: "Iceland",
 		image: "https://images.pexels.com/photos/6675921/pexels-photo-6675921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
@@ -47,7 +47,7 @@ export default function Carousel({title}) {
 		image: "https://images.pexels.com/photos/9424954/pexels-photo-9424954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
 	{
-		city: "Seul",
+		city: "Seoul",
 		country: "South Korea",
 		image: "https://images.pexels.com/photos/2376713/pexels-photo-2376713.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
@@ -82,7 +82,7 @@ export default function Carousel({title}) {
   return (
 		<div className="px-14 pb-14 bg-amber-100">
 			<h2 className="text-4xl md:text-7xl font-bold py-6">{title}</h2>
-			<Slider {...settings} className="p-4">
+			<Slider {...settings} className="px-4">
 				{data.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image}/>)}
     	</Slider>
 		</div>
