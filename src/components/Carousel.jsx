@@ -80,7 +80,7 @@ export default function Carousel({title}) {
 		rows: 2
   };
   return (
-		<div className="px-14 pb-14 bg-amber-100">
+		<div className="px-6 pb-14 bg-amber-100">
 			<h2 className="text-4xl md:text-7xl font-bold py-6">{title}</h2>
 			<Slider {...settings} className="px-4">
 				{data.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image}/>)}
