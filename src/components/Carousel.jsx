@@ -29,7 +29,7 @@ export default function Carousel({title}) {
 	{
 		city: "Reykjavik",
 		country: "Iceland",
-		image: "https://images.pexels.com/photos/6675921/pexels-photo-6675921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
+		image: "https://images.pexels.com/photos/5195511/pexels-photo-5195511.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
 	{
 		city: "Paris",
@@ -42,9 +42,9 @@ export default function Carousel({title}) {
 		image: "https://images.pexels.com/photos/4150032/pexels-photo-4150032.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
 	{
-		city: "Cancún",
+		city: "Tulum",
 		country: "Mexico",
-		image: "https://images.pexels.com/photos/9424954/pexels-photo-9424954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
+		image: "https://images.pexels.com/photos/6048624/pexels-photo-6048624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1", 
 	},
 	{
 		city: "Seoul",
@@ -80,9 +80,9 @@ export default function Carousel({title}) {
 		rows: 2
   };
   return (
-		<div className="px-6 pb-14 bg-amber-100">
+		<div className="px-2 pb-14 bg-amber-100 block">
 			<h2 className="text-4xl md:text-7xl font-bold py-6">{title}</h2>
-			<Slider {...settings} className="px-4">
+			<Slider {...settings} className="px-6 pb-8">
 				{data.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image}/>)}
     	</Slider>
 		</div>
