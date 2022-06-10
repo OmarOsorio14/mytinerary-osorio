@@ -1,15 +1,16 @@
 import React from "react";
+import ContinentTag from "./ContinentTag";
 //import {Link as LinkRouter} from "react-router-dom";
 
-function Card({key, city, country,image,continent,description}) {
+export default function Card({key, city, country,image,continent,description}) {
   return (
 				<section class="text-indigo-200 body-font p-2 bg-gray-900 mx-6 my-10" key={key}>
-        <div class="mx-auto flex px-5  md:flex-row flex-col-reverse items-center jobcard">
+        <div class="mx-auto flex px-5  md:flex-row flex-col-reverse items-center">
           <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
             <figure class="visible">
           		<div class="">
               	<div class="pt-10 px-2 sm:px-6">
-									<span class="inline-block py-1 px-2 rounded-full bg-green-600 text-white  text-xs font-bold tracking-widest mb-2">{continent}</span>
+									<ContinentTag continent={continent}/>
                 	<p class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{city}</p>
 									<p class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{country}</p>
                 	<p class="text-indigo-200 text-base pb-6">{description}</p>
@@ -29,11 +30,9 @@ function Card({key, city, country,image,continent,description}) {
             </figure>
           </div>
           <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 sm:block">
-            <img class="object-cover object-center rounded" alt="hero" src={image} />
+            <img class="object-cover object-center rounded" alt={city} src={image} />
           </div>
         </div>
       </section>
   );
 }
-
-export default Card;
