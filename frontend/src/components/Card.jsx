@@ -13,16 +13,15 @@ export default function Card({city, country,image,continent,description}) {
 										<p className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{city}</p>
 										<p className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{country}</p>
 										<p className="text-indigo-200 text-base pb-6">{description}</p>
-										<div className="flex items-center justify-between">
-											<div className="flex items-center pb-12">
-												<div className="h-12 w-12">
-													<img src="https://tuk-cdn.s3.amazonaws.com/assets/components/testimonials/t_1.png" alt="card" className="h-full w-full object-cover overflow-hidden rounded-full" />
+										<div className="flex flex-wrap items-center">
+											<div className="flex">
+													<img src="https://tuk-cdn.s3.amazonaws.com/assets/components/testimonials/t_1.png" alt="card" className="h-12 w-12 object-cover overflow-hidden rounded-full border-4 z-20" />
+													<img src="https://tuk-cdn.s3.amazonaws.com/assets/components/testimonials/t_1.png" alt="card" className="h-12 w-12 object-cover overflow-hidden rounded-full border-4 z-10 -translate-x-4" />
+													<img src="https://tuk-cdn.s3.amazonaws.com/assets/components/testimonials/t_1.png" alt="card" className="h-12 w-12 object-cover overflow-hidden rounded-full border-4 -translate-x-8" />
 												</div>
-												<p className="text-indigo-200 font-bold ml-3">
-													Jane Doe <br />
-													<span className="text-indigo-200 text-base font-light">Apple Inc</span>
+												<p className="text-indigo-200 font-bold text-left">
+												we have itineraries by jane doe and 5 others users
 												</p>
-											</div>
 										</div>
 									</div>
 							</figure>
