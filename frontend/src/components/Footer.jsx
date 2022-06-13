@@ -1,11 +1,15 @@
 import React from "react";
 import logo from '../assets/full_logo.svg'
 import {Link as LinkRouter} from "react-router-dom"
+import ScrollToTop from "react-scroll-to-top";
+import {ArrowCircleUpIcon} from '@heroicons/react/outline'
 
 
 function Footer() {
   return (
-		<footer className="p-4 sm:p-6 bg-gray-800">
+		<>
+		<ScrollToTop smooth component={<ArrowCircleUpIcon className="bg-indigo-600/50 text-slate-300 backdrop-blur-sm rounded-full w-16 h-16"/>} style={{backgroundColor: "transparent"}}/>
+		<footer className="p-4 sm:p-6 bg-gray-900 mt-auto">
     <div className="md:flex md:justify-between">
         <div className="mb-6 md:mb-0">
 					<LinkRouter to="/">
@@ -73,7 +77,9 @@ function Footer() {
         </div>
     </div>
 </footer>
+</>
   );
 }
 
 export default Footer;
+

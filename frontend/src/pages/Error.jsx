@@ -1,4 +1,5 @@
 import React,{useEffect} from 'react'
+import Alert from '../components/Alert'
 
 export default function Error() {
 	useEffect(()=>{
@@ -6,8 +7,6 @@ export default function Error() {
 	})
 
 	return (
-		<div className="h-screen bg-rose-300 flex flex-col justify-center items-center">
-		<p className="text-7xl font-bold">Error 404 this resource doesn't exist yet</p>
-	</div>
+		<Alert type="error" title="Error 404" message="this resource doesn't exist yet" />
 	)
 }

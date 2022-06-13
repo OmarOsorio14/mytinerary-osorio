@@ -2,6 +2,7 @@ import React, {useEffect,useState} from "react";
 import Card from "../components/Card";
 import {data} from "../assets/data"
 import Search from "../components/Search";
+import Alert from "../components/Alert";
 
 function Cities() {
 
@@ -16,7 +17,6 @@ function Cities() {
 		window.scrollTo(0, 0)
 		console.log(inputSearch)
 		setFilterData(data.filter((place) =>{
-			console.log(place.city)
 			return place.city.toLowerCase().includes(inputSearch.toLowerCase().trim())
 		}))
 	},[inputSearch])
@@ -24,7 +24,9 @@ function Cities() {
   return (
 		<>
 			<Search handleSearch={handleSearch}/>
-			{filterData.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image} continent={card.continent}  description={card.description}/>)}
+			{filterData.length !== 0 
+			? (filterData.map((card,index)=> <Card key={index} city={card.city} country={card.country} image={card.image} continent={card.continent}  description={card.description}/>))
+		 	: <Alert type="warning" title="this city was not found" message="At the moment we do not have this destination within our offer" />}
 		</>
   );
 }

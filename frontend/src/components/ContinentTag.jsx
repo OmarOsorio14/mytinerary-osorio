@@ -9,6 +9,6 @@ export default function ContinentTag({continent}) {
 		Europe: "#4e49e6"
 	}
 	return (
-		<span class={`inline-block py-1 px-2 rounded-full bg-green-600 text-white  text-xs font-bold tracking-widest mb-2`} style={{backgroundColor: colors[continent]}}>{continent}</span>
+		<span className={`inline-block py-1 px-2 rounded-full bg-green-600 text-white  text-xs font-bold tracking-widest mb-2`} style={{backgroundColor: colors[continent]}}>{continent}</span>
 	)
 }

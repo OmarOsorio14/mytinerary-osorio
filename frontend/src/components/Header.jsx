@@ -35,7 +35,7 @@ export default function Header() {
 		}
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-gray-900 sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-8">
@@ -76,7 +76,7 @@ export default function Header() {
                         key={item.name}
                         to={item.to}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -143,7 +143,7 @@ export default function Header() {
 									<Disclosure.Button
 										as="a"
 										className={classNames(
-											item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+											item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
 											'block px-3 py-2 rounded-md text-base font-medium'
 										)}
 										aria-current={item.current ? 'page' : undefined}

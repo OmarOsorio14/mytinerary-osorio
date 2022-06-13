@@ -1,12 +1,12 @@
 .slick-prev:before {
-  color: #2a2921;
+  color: white;
   font-size: 25px;
 	position: absolute;
 	left: 25px;
 }
 
 .slick-next:before {
-  color: #2a2921;
+  color: white;
   font-size: 25px;
 	position: absolute;
 	right: 25px;
@@ -15,7 +15,7 @@
 .slick-dots{
 	position: absolute;
 	right: 4px;
-	bottom: -5px;
+	bottom: -1px;
 }
 .slick-initialized { overflow: hidden; }
 
