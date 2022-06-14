@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Search({handleSearch}) {
 	return (
-		<div className='flex items-center justify-center md:py-6 py-2 min-h-fit bg-gradient-to-r from-indigo-800 via-violet-700 to-purple-800'>
+		<div className='flex items-center justify-center md:py-6 py-2 min-h-fit  bg-gradient-to-r from-orange-200 via-lime-200 to-yellow-100'>
 		<div className="flex items-center w-9/12 mx-auto bg-white rounded-lg " x-data="{ search: '' }">
 			<div className="w-full">
 				<input type="search" className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none" placeholder="search" x-model="search" onKeyUp={event => handleSearch(event.target.value)}/>

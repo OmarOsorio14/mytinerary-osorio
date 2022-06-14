@@ -17,7 +17,7 @@ function Cities() {
 		window.scrollTo(0, 0)
 		console.log(inputSearch)
 		setFilterData(data.filter((place) =>{
-			return place.city.toLowerCase().includes(inputSearch.toLowerCase().trim())
+			return place.city.toLowerCase().startsWith(inputSearch.toLowerCase().trim())
 		}))
 	},[inputSearch])
 
