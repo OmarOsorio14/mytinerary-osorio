@@ -1,11 +1,11 @@
-const Cities = require('../models/cities')
+const City = require('../models/city')
 
 const citiesControllers = {
 	getCities: async(req,res)=>{
 		let cities
 		let error = null
 		try {
-			cities = await Cities.find()
+			cities = await City.find()
 		} catch (err) {error = err}
 		res.json({
 			response: error ? 'ERROR' : {cities},
@@ -18,7 +18,7 @@ const citiesControllers = {
 		let city
 		let error = null
 		try {
-			city = await Cities.findOne({_id: id})
+			city = await City.findOne({_id: id})
 		}catch (err) {
 			error = err
 			console.error(error)
@@ -35,7 +35,7 @@ const citiesControllers = {
 		let city
 		let error = null
 		try{
-			city = await new Cities({
+			city = await new City({
 				name:name,
 				country:country,
 				continent:continent,
@@ -56,7 +56,7 @@ const citiesControllers = {
 		let citydb
 		let error = null
 		try{
-			citydb = await Cities.findOneAndUpdate({_id:id},city,{new: true})
+			citydb = await City.findOneAndUpdate({_id:id},city,{new: true})
 		}catch(err){error = err}
 		res.json({
 			response: error ? 'ERROR' : citydb,
@@ -69,7 +69,7 @@ const citiesControllers = {
 		let city
 		let error = null
 		try{
-			city = await Cities.findOneAndDelete({_id: id})
+			city = await City.findOneAndDelete({_id: id})
 		}catch (err) {error = err}
 		res.json({
 			response: error ? 'ERROR' : city,
@@ -83,7 +83,7 @@ const citiesControllers = {
 		let error = null
 		try {
 			data.map(async(item)=>{
-			await new Cities({
+			await new City({
 						name: item.name,
 						country: item.country,
 						description: item.description,

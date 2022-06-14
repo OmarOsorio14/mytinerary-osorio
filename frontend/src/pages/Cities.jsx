@@ -15,7 +15,9 @@ function Cities() {
 
 	useEffect(()=>{
 		window.scrollTo(0, 0)
-		console.log(inputSearch)
+	})
+	
+	useEffect(()=>{
 		setFilterData(data.filter((place) =>{
 			return place.city.toLowerCase().startsWith(inputSearch.toLowerCase().trim())
 		}))
