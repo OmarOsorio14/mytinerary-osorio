@@ -4,9 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SliderElement from "./SliderElement";
 import "../styles/Carousel.css"
-import {data} from "../assets/data"
-
-export default function Carousel({title}) {
+export default function Carousel({title,data}) {
 	
   var settings = {
 		autoplay: true,
@@ -24,7 +22,7 @@ export default function Carousel({title}) {
 		<div className="px-4 pb-14">
 			<h2 className="text-4xl md:text-7xl font-bold py-6">{title}</h2>
 			<Slider {...settings} className="px-6 pb-8">
-				{data.map((card,index)=> <SliderElement key={index} city={card.city} country={card.country} image={card.image}/>)}
+				{data.map((card)=> <SliderElement key={card._id} id={card._id} name={card.name} country={card.country} image={card.image}/>)}
     	</Slider>
 		</div>
     

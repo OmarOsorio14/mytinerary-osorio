@@ -1,8 +1,8 @@
 import React from "react";
 import ContinentTag from "./ContinentTag";
-//import {Link as LinkRouter} from "react-router-dom";
+import {Link as LinkRouter} from "react-router-dom";
 
-export default function Card({city, country,image,continent,description}) {
+export default function Card({id,name, country,image,continent,description}) {
   return (
 				<div className="text-indigo-200 body-font p-2 bg-gray-900 mx-6 my-6">
 					<div className="mx-auto flex px-5  md:flex-row flex-col-reverse items-center">
@@ -10,7 +10,7 @@ export default function Card({city, country,image,continent,description}) {
 							<figure className="visible">
 									<div className="pt-10 px-2 sm:px-6">
 										<ContinentTag continent={continent}/>
-										<p className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{city}</p>
+										<p className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{name}</p>
 										<p className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{country}</p>
 										<p className="text-indigo-200 text-base pb-6 text-left">{description}</p>
 										<div className="flex flex-wrap items-center">
@@ -22,17 +22,17 @@ export default function Card({city, country,image,continent,description}) {
 											<p className="text-indigo-200 font-bold text-left">we have itineraries by jane doe and 5 others users</p>
 										</div>
 										<div className="flex items-center justify-center mt-2">
-											<button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+											<LinkRouter to={"/detail/"+id} class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
 												<span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
 													See detail of city
 												</span>
-											</button>
+											</LinkRouter>
 										</div>
 									</div>
 							</figure>
 						</div>
 						<div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 sm:block">
-							<img className="object-cover object-center rounded" alt={city} src={image} />
+							<img className="object-cover object-center rounded" alt={name} src={image} />
 						</div>
 					</div>
       </div>
