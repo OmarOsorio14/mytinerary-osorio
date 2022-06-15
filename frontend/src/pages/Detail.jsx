@@ -25,7 +25,7 @@ export default function Detail() {
 	
 	return (
 			<>
-				<img className="w-full max-h-52 object-cover overflow-hidden h-52 shadow-lg shadow-blue-500/50" src={data.image} alt="" />
+				<img className="w-full max-h-52 object-cover overflow-hidden h-52 shadow-lg shadow-lime-500/50" src={data.image} alt="" />
 				<div className="mx-0 md:mx-16 my-4 p-4">
 					<p className=' text-5xl mb-2 text-left font-bold'>{data.name}</p>
 					<p className=' text-3xl mb-2 text-left font-bold'>Description</p>
