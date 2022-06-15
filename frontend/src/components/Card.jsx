@@ -4,7 +4,7 @@ import {Link as LinkRouter} from "react-router-dom";
 
 export default function Card({id,name, country,image,continent,description}) {
   return (
-				<div className="text-indigo-200 body-font p-2 bg-gray-900 mx-6 my-6">
+				<div className="text-indigo-200 body-font p-2 bg-gray-900 md:mx-6 mx-0 my-6">
 					<div className="mx-auto flex px-5  md:flex-row flex-col-reverse items-center">
 						<div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
 							<figure className="visible">
