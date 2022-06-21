@@ -1,23 +1,25 @@
-import React, {useEffect,useState} from "react";
+import React, {useEffect} from "react";
+import { connect } from "react-redux";
 import Carousel from '../components/Carousel';
 import Hero from "../components/Hero";
-import axios from 'axios';
-function Home() {
-	const [data, setData] = useState([]);
+function Home(props) {
 	
 	useEffect(()=>{
 		window.scrollTo(0, 0)
-		axios.get('http://localhost:4000/api/cities')
-      .then(res => setData(res.data.response.cities))
-	},[])
+	})
   return (
 		<>
 		<div className="h-screen bg-cover bg-[url('../assets/home_background.jpg')] flex flex-col justify-center items-center">
 			<Hero />
     </div>
-		<Carousel title="Popular MyTineraries" data={data}/>
+		<Carousel title="Popular MyTineraries" data={props.cities}/>
 		</>
   );
 }
+const mapStateToProps = (state) => {
+	return {
+		cities: state.cityReducer.cities
+	}
+}
 
-export default Home;
+export default connect(mapStateToProps,null)(Home);

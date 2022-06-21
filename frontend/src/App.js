@@ -1,4 +1,6 @@
 import {Route,Routes} from 'react-router-dom'
+import React, {useEffect} from "react";
+
 import Cities from './pages/Cities';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -6,8 +8,13 @@ import Header from './components/Header';
 import './styles/App.css';
 import Detail from './pages/Detail';
 import Error from './pages/Error';
+import cityActions from './redux/actions/cityActions';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
+	useEffect(() => {
+		props.fetchCities()
+	})
   return (
     <div className="App flex flex-col min-h-screen">
 			<Header/>
@@ -24,5 +31,8 @@ function App() {
     </div>
   );
 }
+const mapDispatchToProps = {
+	fetchCities: cityActions.fetchCities
+}
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);
