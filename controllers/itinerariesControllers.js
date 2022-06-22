@@ -31,7 +31,7 @@ const itinerariesControllers = {
 
 	},
 	addItinerary: async(req,res)=>{
-		const {name,userName,userPicture,price,duration,hashtags,likes,activities} = req.body.data
+		const {name,userName,userPicture,price,duration,hashtags,likes,activities, city} = req.body.data
 		let itinerary
 		let error = null
 		try{
@@ -44,6 +44,7 @@ const itinerariesControllers = {
 				hashtags:hashtags,
 				likes:likes,
 				activities:activities,
+				city:city,
 			}).save()
 		}catch(err){error = err}
 		res.json({

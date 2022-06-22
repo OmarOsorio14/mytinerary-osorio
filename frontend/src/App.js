@@ -8,12 +8,14 @@ import Header from './components/Header';
 import './styles/App.css';
 import Detail from './pages/Detail';
 import Error from './pages/Error';
+import {useDispatch} from 'react-redux'
 import cityActions from './redux/actions/cityActions';
-import { connect } from 'react-redux';
 
-function App(props) {
+function App() {
+	const dispatch = useDispatch()
+
 	useEffect(() => {
-		props.fetchCities()
+		dispatch(cityActions.getCities())
 	})
   return (
     <div className="App flex flex-col min-h-screen">
@@ -25,14 +27,9 @@ function App(props) {
 				<Route path="/detail/:id" element={<Detail/>} />
 				<Route path="*" element={<Error/>} />
 			</Routes>
-
 			<Footer />
 			
     </div>
   );
 }
-const mapDispatchToProps = {
-	fetchCities: cityActions.fetchCities
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

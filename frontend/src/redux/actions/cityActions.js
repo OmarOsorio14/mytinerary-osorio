@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const cityActions = {
-		fetchCities: ()=>{
+		getCities: ()=>{
 			return async(dispatch, getState) => {
 				const res = await axios.get('http://localhost:4000/api/cities')
 				dispatch({type:'getCities', payload:res.data.response.cities})
