@@ -5,7 +5,7 @@ const citiesControllers = {
 		let cities
 		let error = null
 		try {
-			cities = await City.find()
+			cities = await City.find().populate("itineraries")
 		} catch (err) {error = err}
 		res.json({
 			response: error ? 'ERROR' : {cities},
@@ -97,5 +97,26 @@ const citiesControllers = {
 				error: error
 		})
 },
+addItineraryToCity: async(req,res)=>{
+	const idCity = req.params.id
+	const idItinerary = req.body.data.idItinerary;
+	let city
+	let citydb
+	let error = null
+	try {
+		city = await City.findOne({_id: idCity})
+		city.itineraries = city.itineraries.push(idItinerary)
+		citydb = await City.findOneAndUpdate({_id:idCity},city,{new: true})
+	}catch (err) {
+		error = err
+		console.error(error)
+	}
+	res.json({
+		response: error ? 'ERROR' : citydb,
+		success: error ? false : true,
+		error: error
+	})
+}
+
 }
 module.exports = citiesControllers

@@ -28,7 +28,7 @@ const [loading, setLoading] = useState(true);
 			<>
 				<Search handleSearch={handleSearch}/>
 				{filter.length !== 0 
-				? (filter.map((card)=> <Card key={card._id} id={card._id} name={card.name} country={card.country} image={card.image} continent={card.continent}  description={card.description}/>))
+				? (filter.map((card)=> <Card key={card._id} id={card._id} name={card.name} country={card.country} image={card.image} continent={card.continent}  description={card.description} itineraries={card.itineraries}/>))
 				: loading ? "" : <Alert type="warning" title="this city was not found" message="At the moment we do not have this destination within our offer" />}
 				
 			</>

@@ -14,7 +14,7 @@ function Home() {
 		<div className="h-screen bg-cover bg-[url('../assets/home_background.jpg')] flex flex-col justify-center items-center">
 			<Hero />
     </div>
-		<Carousel title="Popular MyTineraries" data={cities}/>
+		<Carousel title="Popular MyTineraries" data={cities} load={2} />
 		</>
   );
 }
