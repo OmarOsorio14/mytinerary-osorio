@@ -18,9 +18,7 @@ const [loading, setLoading] = useState(true);
 			setLoading(true)
 		}
 	},[cities.length])
-
 	
-
 	const handleSearch = (event)=>{
 		dispatch(cityActions.filterCities(cities,event))
 	}

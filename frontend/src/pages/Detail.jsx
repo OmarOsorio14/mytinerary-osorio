@@ -11,22 +11,43 @@ function Detail() {
 	const {id} = useParams()
 	const dispatch = useDispatch()
 
-
+	const [cityLoad, setCityLoad] = useState(false);
 	const [showSideBar, setShowSideBar] = useState(false);
+	const [refs, setRefs] = useState([]);
+
 
 
 	useEffect(()=>{
 		window.scrollTo(0, 0)
 	},[])
 
+	const city = useSelector(store => store.cityReducer.oneCity)
+
+	const makeRefs = () => {
+		setRefs(city.itineraries.reduce((acc, value) => {
+			acc[value._id] = React.createRef();
+			return acc;
+		}, {}));
+	}
+
 	useEffect(()=>{
 		dispatch(cityActions.getOneCity(id));
-	})
-	const city = useSelector(store => store.cityReducer.oneCity)
-	
-
+		if(city.itineraries !== undefined){
+			setCityLoad(true)
+			makeRefs()		
+		}else{
+			setCityLoad(false)
+		}
+	},[city.itineraries])
 	const handleClose = (event)=>{
 		setShowSideBar(event)
+	}
+	const handleScroll = (id)=>{
+		refs[id].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+		handleClose(false)
 	}
 	return (
 			<>
@@ -35,12 +56,15 @@ function Detail() {
 					<p className=' text-5xl mb-2 text-left font-bold'>{city.name}</p>
 					<p className=' text-3xl mb-2 text-left font-bold'>Description</p>
 					<p className=' text-left'>{city.description}</p>
-					<Itinerary/>
+					{cityLoad ? Object.keys(city.itineraries).map((itinerary) => {
+						return <div className='pt-14' ref={refs[city.itineraries[itinerary]._id]} key={city.itineraries[itinerary]._id}><Itinerary id={city.itineraries[itinerary]._id} itinerary={city.itineraries[itinerary]}/></div> 
+						
+					}): ""}
 				</div>
 				<button className="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-2 max-w-max max-h-max fixed inset-y-1/2 rounded animate-pulse" onClick={()=>{handleClose(!showSideBar)}}>
   				<ArrowRightIcon className='md:h-8 md:w-8 h-4 w-4' />
 				</button>
-				{showSideBar ? 	<SideBar handleClose={handleClose} city={city.name}/> : ""}
+				{showSideBar ? 	<SideBar handleClose={handleClose} handleScroll={handleScroll} city={city.name} itinerary={city.itineraries}/> : ""}
 			</>
 	)
 }

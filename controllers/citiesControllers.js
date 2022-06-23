@@ -18,7 +18,7 @@ const citiesControllers = {
 		let city
 		let error = null
 		try {
-			city = await City.findOne({_id: id})
+			city = await City.findOne({_id: id}).populate("itineraries")
 		}catch (err) {
 			error = err
 			console.error(error)
