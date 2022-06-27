@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react'
 import SideBar from '../components/SideBar'
-import { ArrowRightIcon } from '@heroicons/react/outline'
+import { ArrowRightIcon } from '@heroicons/react/solid'
 import { useParams } from 'react-router-dom'
 import cityActions from '../redux/actions/cityActions';
 import {useDispatch,useSelector} from 'react-redux'

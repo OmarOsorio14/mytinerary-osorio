@@ -10,12 +10,16 @@ import Detail from './pages/Detail';
 import Error from './pages/Error';
 import {useDispatch} from 'react-redux'
 import cityActions from './redux/actions/cityActions';
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
+import countryActions from './redux/actions/countryActions';
 
 function App() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(cityActions.getCities())
+		dispatch(countryActions.getCountries())
 	})
   return (
     <div className="App flex flex-col min-h-screen">
@@ -25,6 +29,8 @@ function App() {
 				<Route path="/" element={<Home/>} />
 				<Route path="/cities" element={<Cities/>} />
 				<Route path="/detail/:id" element={<Detail/>} />
+				<Route path="/login" element={<LogIn/>} />
+				<Route path="/signup" element={<SignUp/>} />
 				<Route path="*" element={<Error/>} />
 			</Routes>
 			<Footer />

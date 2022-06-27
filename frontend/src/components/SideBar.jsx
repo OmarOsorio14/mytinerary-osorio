@@ -1,5 +1,5 @@
 import React from 'react'
-import { XCircleIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/solid'
 
 export default function SideBar({handleClose,handleScroll,city,itinerary}) {
 	let itineraries = []

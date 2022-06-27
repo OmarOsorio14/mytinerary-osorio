@@ -113,7 +113,7 @@ export default function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <LinkRouter
-                            to="/logIn"
+                            to="/login"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                           Log In
@@ -123,7 +123,7 @@ export default function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <LinkRouter
-                            to="/SingUp"
+                            to="/signup"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign Up
