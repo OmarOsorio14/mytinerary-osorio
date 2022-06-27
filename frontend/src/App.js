@@ -1,6 +1,6 @@
 import {Route,Routes} from 'react-router-dom'
 import React, {useEffect} from "react";
-
+import { Toaster } from 'react-hot-toast';
 import Cities from './pages/Cities';
 import Home from './pages/Home';
 import Footer from './components/Footer';
@@ -33,6 +33,7 @@ function App() {
 				<Route path="/signup" element={<SignUp/>} />
 				<Route path="*" element={<Error/>} />
 			</Routes>
+			<Toaster/>
 			<Footer />
 			
     </div>
