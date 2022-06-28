@@ -36,7 +36,7 @@ const usersControllers = {
             } else {
                 const encryptedPassword = bcryptjs.hashSync(password, 10) 
             
-                const nuevoUsuario = await new User({
+                const newUser = await new User({
 									username,
 									first_name,
 									last_name,
@@ -47,15 +47,14 @@ const usersControllers = {
 									from:[from],
                 })              
                 if (from !== "form-signUp") { 
-                  await nuevoUsuario.save()
+                  await newUser.save()
                   res.json({
                     success: true, 
                     from:"signUp",
                     message: "You have signed up successfully with " +from
                   }) 
-    
                 } else {
-                    await nuevoUsuario.save()
+                    await newUser.save()
                     res.json({
                         success: true, 
                         from:"signUp",
@@ -68,7 +67,38 @@ const usersControllers = {
         }
 	},
 	logIn: async(req,res)=>{
+		const { email, password,  from } = req.body.logedUser
+		try {
+			const userExists = await User.findOne({ email })
 
+			if (!userExists) {
+				res.json({ success: false, message: "Your user has not been registered, please make the signup process first" })
+
+			} else {
+				if (from === "form-signUp") { 
+					let passwordMatch =  userExists.password.filter(pass =>bcryptjs.compareSync(password, pass))
+					if (passwordMatch.length >0) {
+					const userData = {
+						id:userExists._id,
+						username: userExists.username,
+						email: userExists.email,
+						from:from}
+						res.json({ success: true,  
+											from:from,
+											response: {userData }, 
+											message:"wellcome again "+userData.username,
+											})
+					} else {
+						res.json({ success: false, 
+											from: from, 
+											message:"your password don't match with database register"
+										})
+					}
+				} 
+			}
+		} catch (error) {
+				res.json({ success: false, message: "Something went wrong try again in a few minutes" })
+		}
 	}
 }
 module.exports = usersControllers

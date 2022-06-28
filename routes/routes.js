@@ -32,8 +32,10 @@ Router.route('/itineraries/:id')
 .put(modifyItinerary) 
 .get(getOneItinerary)
 
-Router.route('/user') 
-.get(logIn)
+Router.route('/auth/signup') 
 .post(signUp)
+
+Router.route('/auth/login') 
+.post(logIn)
 
 module.exports = Router

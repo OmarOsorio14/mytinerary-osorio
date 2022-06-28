@@ -1,8 +1,7 @@
 import React, {useState,useEffect} from "react";
 import {Link as LinkRouter} from "react-router-dom";
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid'
-import {useSelector} from 'react-redux'
-import {useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import userActions from "../redux/actions/userActions";
 
 export default function SignUp() {
@@ -89,13 +88,13 @@ export default function SignUp() {
 					<label htmlFor="photo" className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Photo Url</label>
 			</div>
 			<button type="submit" className="mt-3 text-lg font-semibold bg-gray-800 mx-auto text-white rounded-lg px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
-        Log In
+        sign Up
       </button>
 			<div className='flex items-center justify-center flex-wrap'>
 				<div className="w-full flex items-center justify-center mb-2 flex-wrap">
-					<p>Don't have an account?</p>
+					<p>do you already have an account created?</p>
 					<LinkRouter to="/" className="ml-2 text-lg font-semibold text-teal-500 hover:text-teal-700 hover:border-b-2 hover:border-teal-700 ">
-					Sign up
+					Log In
 				</LinkRouter>
 				</div>
 				<button type="button" className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2">
