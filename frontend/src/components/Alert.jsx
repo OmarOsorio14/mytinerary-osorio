@@ -21,13 +21,16 @@ export default function Alert({type,title,message}) {
 	}
 
 	return (
-		<div className="container mx-auto">
+		<div className="container mx-auto my-2 text-center">
 			<div className="w-screen max-w-lg mx-auto mt-6 p-2 rounded-lg" style={{backgroundColor: typeOfMessage[type].color}}>
 				<div className="flex space-x-2">
 					<svg className="w-6 h-6 stroke-stone-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={typeOfMessage[type].icon}></path></svg>
 					<p className="text-stone-900 font-bold">{title}</p>
 				</div>
-				<p className="ml-8 text-stone-800">{message}</p>
+				{typeof(message) === "string" ? <p className="ml-8 text-stone-800">{message}</p> 
+				:<ul>
+					{ message.map((error,index) => <li key={index} > {error.message}</li>)}
+				</ul>}
 			</div>
 		</div>
 	)
