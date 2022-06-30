@@ -5,7 +5,7 @@ const usersControllers = {
 	signUp: async(req,res)=>{
 		let {username, first_name, last_name, email, password, country, photo, from  } = req.body.userData
       try {
-      	const userExists = await User.findOne({ username })
+      	const userExists = await User.findOne({ email })
 
           if (userExists) {
             if (userExists.from.indexOf(from) !== -1) {
@@ -81,23 +81,53 @@ const usersControllers = {
 					const userData = {
 						id:userExists._id,
 						username: userExists.username,
+						first_name: userExists.first_name,
+						last_name: userExists.last_name,
 						email: userExists.email,
+						country: userExists.country,
+						photo: userExists.photo,
 						from:from}
+
 						res.json({ success: true,  
 											from:from,
 											response: {userData }, 
-											message:"wellcome again "+userData.username,
+											message: `welcome back ${userData.username}!`
 											})
 					} else {
 						res.json({ success: false, 
 											from: from, 
-											message:"your password don't match with database register"
+											message:"your credentials don't match with database register"
 										})
 					}
-				} 
+				}else{
+					let passwordMatch =  userExists.password.filter(pass =>bcryptjs.compareSync(password, pass))
+					if (passwordMatch.length >0) {
+					const userData = {
+						id:userExists._id,
+						username: userExists.username,
+						first_name: userExists.first_name,
+						last_name: userExists.last_name,
+						email: userExists.email,
+						country: userExists.country,
+						photo: userExists.photo,
+						from:from}
+
+						res.json({ success: true,  
+											from:from,
+											response: {userData }, 
+											message: `welcome back ${userData.username}!`
+											})
+					} else {
+						res.json({ success: false, 
+											from: from, 
+											message: `there is no register from ${from}, please Sign Up with this way first`
+										})
+					}
+				}
+		
 			}
 		} catch (error) {
-				res.json({ success: false, message: "Something went wrong try again in a few minutes" })
+				res.json({ success: false, message: error })
 		}
 	}
 }

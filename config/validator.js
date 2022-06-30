@@ -4,36 +4,36 @@ const validator = (req, res, next) => {
 
 	const schema = joi.object({
 	username: joi.string()
-						.max(20)
+						.max(100)
             .min(2)
             .trim()
-            .pattern(new RegExp('[a-zA-Z0-9]'))
+            .pattern(new RegExp('[a-zA-Z0-9 ]'))
             .required()
             .messages({
                 'string.min': 'username: min 2 characters',
-                'string.max': 'username: max 20 characters'}),
+                'string.max': 'username: max 100 characters'}),
 
 	first_name: joi.string()
-						.max(20)
+						.max(100)
 						.min(2)
 						.trim()
-						.pattern(new RegExp('^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$'))
+						.pattern(new RegExp('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$'))
 						.required()
 						.messages({
 								'string.pattern.base' :'first name: only recive letters',
 								'string.min': 'first name: min 2 characters',
-								'string.max': 'first name: max 20 characters'}),
+								'string.max': 'first name: max 100 characters'}),
 
 	last_name: joi.string()
-						.max(20)
+						.max(100)
 						.min(2)
 						.trim()
-						.pattern(new RegExp('^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$'))
+						.pattern(new RegExp('^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$'))
 						.required()
 						.messages({
-								'string.pattern.base' :'first name: only recive letters',
+								'string.pattern.base' :'last name: only recive letters',
 								'string.min': 'last name: min 2 characters',
-								'string.max': 'last name: max 20 characters'}),
+								'string.max': 'last name: max 100 characters'}),
 
 	email: joi.string()
 						.email({minDomainSegments:2})

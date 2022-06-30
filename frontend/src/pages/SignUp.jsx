@@ -4,6 +4,9 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/solid'
 import {useSelector, useDispatch} from 'react-redux'
 import userActions from "../redux/actions/userActions";
 import Alert from "../components/Alert";
+import GoogleSignUp from "../components/GoogleSignUp";
+import toast from 'react-hot-toast';
+
 
 export default function SignUp() {
 	const dispatch = useDispatch()
@@ -13,7 +16,9 @@ export default function SignUp() {
 	const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 	const [match, setMatch] = useState(true);
 	const [errorValidator,setErrorValidator] = useState([]);
-	const [showErrorValidator, setShowErrorValidator] = useState(false); //
+	const [showErrorValidator, setShowErrorValidator] = useState(false); 
+	const [countrySelected, setCountrySelected] = useState("");
+
 
 
 	const countries = useSelector(store => store.countryReducer.countries)
@@ -23,7 +28,9 @@ export default function SignUp() {
 	},[passwordValue,confirmPasswordValue])
 	const handleSubmit = (event) =>{
 		event.preventDefault()
-		if(match){
+		if(countrySelected === ""){
+			toast.error("you must select a country first");
+		}else if(match){
 			const userData = {
 				username: event.target["username"].value.trim(),
 				first_name: event.target["first_name"].value.trim(),
@@ -91,7 +98,8 @@ export default function SignUp() {
 				</div>
 				<div className="relative z-0 w-full mb-6 group">
 					<label htmlFor="country" className="block mb-2 text-sm font-medium text-gray-500">Select your country</label>
-					<select id="country" name="country" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+					<select id="country" name="country" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onChange={(e) => setCountrySelected(e.target.value)}>
+						<option value="">unselected</option>
 						{countries.map((country) => <option value={country} key={country}>{country}</option>)}
 					</select>
 				</div>
@@ -114,10 +122,7 @@ export default function SignUp() {
 						<svg className="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path></svg>
 						Sign in with Facebook
 					</button>
-					<button type="button" className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2">
-						<svg className="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-						Sign in with Google
-					</button>
+					<GoogleSignUp country={countrySelected}/>
 				</div>	
 			</form>
 			
