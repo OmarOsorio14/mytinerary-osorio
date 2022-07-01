@@ -100,15 +100,16 @@ const usersControllers = {
 						country: userExists.country,
 						photo: userExists.photo,
 						from:from}
-
+						const token = jwt.sign({...userData}, process.env.SECRET_KEY, {expiresIn: 60 * 60 * 24})
+						console.log(token)
 						res.json({ success: true,  
 											from:from,
-											response: {userData }, 
+											response: {token, userData }, 
 											message: `welcome back ${userData.username}!`
 											})
 					} else {
 						res.json({ success: false, 
-											from: from, 
+											from: from,
 											message:"your credentials don't match with database register"
 										})
 					}
@@ -124,10 +125,10 @@ const usersControllers = {
 						country: userExists.country,
 						photo: userExists.photo,
 						from:from}
-
+						const token = jwt.sign({...userData}, process.env.SECRET_KEY, {expiresIn: 60 * 60 * 24})
 						res.json({ success: true,  
 											from:from,
-											response: {userData }, 
+											response: {token, userData }, 
 											message: `welcome back ${userData.username}!`
 											})
 					} else {
@@ -160,6 +161,27 @@ const usersControllers = {
 			success: false,
 			message: `email has not account yet!`})
 		}
-},
+	},
+	verifyToken:(req, res) => {
+		if(req.user){
+			res.json({
+				success: true,
+				response:{id: req.user.id,
+								username: req.user.username,
+								first_name: req.user.first_name,
+								last_name: req.user.last_name,
+								email: req.user.email,
+								photo: req.user.photo,
+								country: req.user.country,
+							from: "token"},
+				message: "welcome back "+req.user.username
+			})
+		}else{
+			res.json({
+				success: false, 
+				message: "Sessions expires, please sign in again."
+			})
+		}
+	}
 }
 module.exports = usersControllers

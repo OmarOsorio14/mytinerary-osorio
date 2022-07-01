@@ -1,6 +1,5 @@
 const initialState = {
-	user: null,
-	toast:{ message: '', success:false},
+	user: null
 }
 
 const userReducer = (state = initialState, action)=>{
@@ -10,11 +9,6 @@ const userReducer = (state = initialState, action)=>{
 				...state,
 				user: action.payload
 			}
-			case 'message':
-				return {
-					...state,
-					toast: action.payload
-				}
 		default:
 			return state
 	}

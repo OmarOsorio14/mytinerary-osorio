@@ -13,6 +13,8 @@ import cityActions from './redux/actions/cityActions';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 import countryActions from './redux/actions/countryActions';
+import userActions from './redux/actions/userActions';
+
 
 function App() {
 	const dispatch = useDispatch()
@@ -20,6 +22,10 @@ function App() {
 	useEffect(() => {
 		dispatch(cityActions.getCities())
 		dispatch(countryActions.getCountries())
+		if(localStorage.getItem('token')!==null){
+			const token = localStorage.getItem('token')
+			dispatch(userActions.verifyToken(token))
+		}
 	})
   return (
     <div className="App flex flex-col min-h-screen">

@@ -24,14 +24,26 @@ const userActions = {
 				const res = await axios.post('http://localhost:4000/api/auth/login', {logedUser})
 
 				if(res.data.success){
+					localStorage.setItem('token', res.data.response.token)
 					dispatch({ type: 'logInUser', payload: res.data.response.userData });
-					toast.success(res.data.message);
-					console.log(res)
+					toast.success(res.data.message)
 				}else{
-					toast.error(res.data.message);
-					console.log(res)
+					toast.error(res.data.message)
 				}
 			}
-		}
+		},
+		verifyToken: (token) => {
+			return async (dispatch, getState) => {
+					//console.log(token)
+					const user = await axios.get('http://localhost:4000/api/auth/loginToken', {headers: {'Authorization': 'Bearer '+token}} )
+					console.log(user)
+					if (user.data.success) {
+						dispatch({ type: 'logInUser', payload: user.data.response });
+						toast.success(user.data.message)
+					} else {
+							localStorage.removeItem('token')
+					}
+			}
+	}
 }
 export default userActions
