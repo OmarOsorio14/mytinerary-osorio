@@ -28,7 +28,7 @@ export default function GoogleSignUp({country}) {
 	}
 	useEffect(()=>{
 		/* global google */
-		window.onload = function(){
+	
 			google.accounts.id.initialize({
 				client_id: process.env.REACT_APP_CLIENT_ID,
 				callback: handleCallbackResponse
@@ -37,7 +37,7 @@ export default function GoogleSignUp({country}) {
 			google.accounts.id.renderButton(
 				document.getElementById('googleButton'),{theme: "outline", size: "medium"}
 			)
-		}
+		
 	})
 
 	return (
