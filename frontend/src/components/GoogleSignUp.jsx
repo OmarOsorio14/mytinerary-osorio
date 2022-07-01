@@ -4,7 +4,6 @@ import {useDispatch} from 'react-redux'
 import userActions from "../redux/actions/userActions";
 import toast from 'react-hot-toast';
 
-
 export default function GoogleSignUp({country}) {
 	const dispatch = useDispatch()
 
@@ -29,14 +28,16 @@ export default function GoogleSignUp({country}) {
 	}
 	useEffect(()=>{
 		/* global google */
-		google.accounts.id.initialize({
-			client_id: process.env.REACT_APP_CLIENT_ID,
-			callback: handleCallbackResponse
-		})
-
-		google.accounts.id.renderButton(
-			document.getElementById('googleButton'),{theme: "outline", size: "medium"}
-		)
+		window.onload = function(){
+			google.accounts.id.initialize({
+				client_id: process.env.REACT_APP_CLIENT_ID,
+				callback: handleCallbackResponse
+			})
+	
+			google.accounts.id.renderButton(
+				document.getElementById('googleButton'),{theme: "outline", size: "medium"}
+			)
+		}
 	})
 
 	return (

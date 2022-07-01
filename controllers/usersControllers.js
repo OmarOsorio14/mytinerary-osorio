@@ -1,12 +1,18 @@
 const User = require('../models/user')
 const bcryptjs = require('bcryptjs')
+const crypto = require('crypto')
+const nodemailer = require('nodemailer')
+const jwt = require('jsonwebtoken')
+const sendVerification = require('./sendVerification')
+
 const usersControllers = {
 
 	signUp: async(req,res)=>{
 		let {username, first_name, last_name, email, password, country, photo, from  } = req.body.userData
       try {
       	const userExists = await User.findOne({ email })
-
+				const verification = false
+				const uniqueString = crypto.randomBytes(15).toString('hex')
           if (userExists) {
             if (userExists.from.indexOf(from) !== -1) {
               res.json({ success: false,
@@ -19,13 +25,15 @@ const usersControllers = {
               userExists.password.push(encryptedPassword) 
 
               if(from === "form-signUp"){ 
-                await userExists.save()        
+                await userExists.save() 
+								sendVerification(email,uniqueString)       
                 res.json({
                   success: true, 
                   from:"signUp", 
                   message: "You have signed up successfully"
                 }) 
               }else{
+								userExists.verification = true
                 userExists.save()
                 res.json({ success: true,
                           from:"signUp", 
@@ -44,9 +52,12 @@ const usersControllers = {
                   password:[encryptedPassword],
 									country,
 									photo,
+									uniqueString:uniqueString,
+									verification:verification,
 									from:[from],
                 })              
                 if (from !== "form-signUp") { 
+									newUser.verification = true
                   await newUser.save()
                   res.json({
                     success: true, 
@@ -55,6 +66,7 @@ const usersControllers = {
                   }) 
                 } else {
                     await newUser.save()
+										sendVerification(email,uniqueString)
                     res.json({
                         success: true, 
                         from:"signUp",
@@ -74,7 +86,8 @@ const usersControllers = {
 			if (!userExists) {
 				res.json({ success: false, message: "Your user has not been registered, please make the signup process first" })
 
-			} else {
+			} else if(userExists.verification){
+
 				if (from === "form-signUp") { 
 					let passwordMatch =  userExists.password.filter(pass =>bcryptjs.compareSync(password, pass))
 					if (passwordMatch.length >0) {
@@ -124,11 +137,29 @@ const usersControllers = {
 										})
 					}
 				}
-		
+			}else{
+				res.json({
+					success: false,
+					from: from,
+					message: `validate your account`})
 			}
 		} catch (error) {
-				res.json({ success: false, message: error })
+				res.json({ success: false, message: "Something went wrong try again in a few minutes"  })
 		}
-	}
+	},
+	verifyMail: async (req, res) => {
+		const {string} = req.params
+		const user = await User.findOne({uniqueString: string})
+
+		if (user) {
+			user.verification = true
+			await user.save()
+			res.redirect("http://localhost:3000/login")
+		}
+		else {res.json({
+			success: false,
+			message: `email has not account yet!`})
+		}
+},
 }
 module.exports = usersControllers
