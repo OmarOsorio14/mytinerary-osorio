@@ -32,6 +32,13 @@ const userActions = {
 				}
 			}
 		},
+		signOutUser: ()=>{
+			return (dispatch,getState) =>{
+				localStorage.removeItem('token');
+				dispatch({ type: 'logOutUser', payload: null });
+				toast.success('Sign Out success')
+			}
+		},
 		verifyToken: (token) => {
 			return async (dispatch, getState) => {
 					//console.log(token)

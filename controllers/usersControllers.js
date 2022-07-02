@@ -182,6 +182,7 @@ const usersControllers = {
 				message: "Sessions expires, please sign in again."
 			})
 		}
-	}
+	},
+
 }
 module.exports = usersControllers
