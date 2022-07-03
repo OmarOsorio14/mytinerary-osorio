@@ -18,7 +18,7 @@ const cityActions = {
 					const res = await axios.get(`http://localhost:4000/api/cities/${id}`)
 					dispatch({type:'oneCity', payload:res.data.response})
 			}catch (err) {
-					console.log(err)
+					console.error(err)
 			}
 			}
 		}

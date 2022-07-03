@@ -49,7 +49,7 @@ function Footer() {
                         <LinkRouter to="/logIn" className="hover:underline">Log In</LinkRouter>
                     </li>
 										<li>
-                        <LinkRouter to="/singUp" className="hover:underline">Sign Up</LinkRouter>
+                        <LinkRouter to="/signUp" className="hover:underline">Sign Up</LinkRouter>
                     </li>
                 </ul>
             </div>

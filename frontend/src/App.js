@@ -1,4 +1,4 @@
-import {Route,Routes} from 'react-router-dom'
+import {Route,Routes, Navigate} from 'react-router-dom'
 import React, {useEffect} from "react";
 import { Toaster } from 'react-hot-toast';
 import Cities from './pages/Cities';
@@ -7,8 +7,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import './styles/App.css';
 import Detail from './pages/Detail';
-import Error from './pages/Error';
-import {useDispatch} from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
 import cityActions from './redux/actions/cityActions';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
@@ -18,6 +17,7 @@ import userActions from './redux/actions/userActions';
 
 function App() {
 	const dispatch = useDispatch()
+	const user = useSelector(store => store.userReducer.user)
 
 	useEffect(() => {
 		dispatch(cityActions.getCities())
@@ -26,7 +26,7 @@ function App() {
 			const token = localStorage.getItem('token')
 			dispatch(userActions.verifyToken(token))
 		}
-	})
+	},[])
   return (
     <div className="App flex flex-col min-h-screen">
 			<Header/>
@@ -35,9 +35,9 @@ function App() {
 				<Route path="/" element={<Home/>} />
 				<Route path="/cities" element={<Cities/>} />
 				<Route path="/detail/:id" element={<Detail/>} />
-				<Route path="/login" element={<LogIn/>} />
-				<Route path="/signup" element={<SignUp/>} />
-				<Route path="*" element={<Error/>} />
+				{!user && <Route path="/login" element={<LogIn/>} />}
+				{!user && <Route path="/signup" element={<SignUp/>} />}
+				<Route path="*" element={ <Navigate to="/" /> } />
 			</Routes>
 			<Toaster/>
 			<Footer />

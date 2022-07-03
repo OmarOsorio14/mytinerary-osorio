@@ -31,7 +31,7 @@ const usersControllers = {
                   success: true, 
                   from:"signUp", 
                   message: "You have signed up successfully"
-                }) 
+                })
               }else{
 								userExists.verification = true
                 userExists.save()
@@ -70,7 +70,7 @@ const usersControllers = {
                     res.json({
                         success: true, 
                         from:"signUp",
-                        message: "You have signed up successfully"
+                        message: "You have signed up successfully, please verify your email address before login"
                     })
                 } 
             }
@@ -101,7 +101,6 @@ const usersControllers = {
 						photo: userExists.photo,
 						from:from}
 						const token = jwt.sign({...userData}, process.env.SECRET_KEY, {expiresIn: 60 * 60 * 24})
-						console.log(token)
 						res.json({ success: true,  
 											from:from,
 											response: {token, userData }, 

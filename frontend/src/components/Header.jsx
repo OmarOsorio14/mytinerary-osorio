@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import '../styles/App.css'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -19,9 +19,6 @@ function classNames(...classes) {
 export default function Header() {
 	const dispatch = useDispatch()
 	const user = useSelector(store => store.userReducer.user)
-	useEffect(() =>{
-		console.log(user)
-	})
 
 	const location = useLocation();
 		if(location.pathname === '/' ){

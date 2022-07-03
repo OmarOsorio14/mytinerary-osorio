@@ -5,7 +5,7 @@ const userActions = {
 		signUpUser: (userData)=>{
 			return async(dispatch, getState) => {
 				const res = await axios.post('http://localhost:4000/api/auth/signup', {userData})
-				console.log(res)
+				
 				if(res.data.success){
 					toast.success(res.data.message);
 				}else{
@@ -41,9 +41,7 @@ const userActions = {
 		},
 		verifyToken: (token) => {
 			return async (dispatch, getState) => {
-					//console.log(token)
 					const user = await axios.get('http://localhost:4000/api/auth/loginToken', {headers: {'Authorization': 'Bearer '+token}} )
-					console.log(user)
 					if (user.data.success) {
 						dispatch({ type: 'logInUser', payload: user.data.response });
 						toast.success(user.data.message)

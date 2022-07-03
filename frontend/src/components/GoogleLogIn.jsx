@@ -25,7 +25,7 @@ export default function GoogleLogIn() {
 			})
 	
 			google.accounts.id.renderButton(
-				document.getElementById('googleButton'),{theme: "outline", size: "medium"}
+				document.getElementById('googleButton'),{theme: "outline", size: "medium", locale: "en"}
 			)
 		} catch (error) {
 			console.error(error)
