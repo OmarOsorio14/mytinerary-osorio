@@ -98,6 +98,28 @@ const itinerariesControllers = {
 			success: error ? false : true,
 			error: error
 		})
-	}
+	},
+	giveLike: async(req,res)=>{
+		const idItinerary = req.body.data.id
+		const idUser = req.body.data.userid
+		let itinerary
+		let itinerarydb
+		let error = null
+		try{
+			itinerary = await Itinerary.findOne({_id: idItinerary})
+			if(itinerary.likes.indexOf(idUser) === -1){
+				itinerary.likes.push(idUser)
+			}else{
+				itinerary.likes.splice(itinerary.likes.indexOf(idUser), 1)
+			}
+			itinerarydb = await Itinerary.findOneAndUpdate({_id:idItinerary},itinerary,{new: true})
+		}catch (err) {error = err
+		console.error(err)}
+		res.json({
+			response: error ? 'ERROR' : itinerarydb,
+			success: error ? false : true,
+			error: error
+	})
+}
 }
 module.exports = itinerariesControllers

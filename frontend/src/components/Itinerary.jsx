@@ -1,16 +1,27 @@
 import React, {useState} from 'react'
-
-import {HeartIcon} from '@heroicons/react/outline'
+import {HeartIcon} from '@heroicons/react/solid'
 import {ClockIcon} from '@heroicons/react/outline'
 import bill from '../assets/bill.png'
 import Carousel from './Carousel'
 import Alert from './Alert'
-
+import {useDispatch,useSelector} from 'react-redux'
+import itineraryActions from '../redux/actions/itineraryActions'
 
 export default function Itinerary({itinerary}) {
-	console.log(itinerary)
-
+	const dispatch = useDispatch()
+	const user = useSelector(store => store.userReducer.user)
 	const [showMore, setShowMore] = useState(false);
+
+	const handleLike = ()=>{
+		if(user){
+			dispatch(itineraryActions.giveLike({
+				id: itinerary._id,
+				userid: user.id
+			}))
+		}else{
+			dispatch(itineraryActions.giveLike("not logged"))
+		}
+	}
 	
 let price = [];
   for (let i = 0; i < itinerary.price; i++) {
@@ -32,7 +43,11 @@ let price = [];
 				{itinerary.hashtags.map((element,index) => <p key={index} className='ml-2 text-indigo-500'>{element}</p>)}
 			</div>
 			<div className="flex justify-end mt-4 justify-around">
-				<p className="flex items-center justify-center"><button><HeartIcon className='w-6'/></button>{itinerary.likes.length}</p>
+				<p className="flex items-center justify-center">
+					<button onClick={()=>handleLike()}>
+						{user !== null ? itinerary.likes.indexOf(user.id) !== -1 ? <HeartIcon className='w-6 text-red-500'/> : <HeartIcon className='w-6'/>
+						:<HeartIcon className='w-6'/>}
+					</button>{itinerary.likes.length}</p>
 				<p className="flex items-center justify-center"><ClockIcon className='w-6'/>{itinerary.duration}</p>
 				<p className="text-xl font-medium text-indigo-500">{itinerary.userName}</p>
 			</div>

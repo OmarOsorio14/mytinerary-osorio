@@ -5,7 +5,7 @@ const citiesControllers = require('../controllers/citiesControllers');
 const {getCities, getOneCity, addCity, modifyCity, removeCity, addMultipleCity,addItineraryToCity} = citiesControllers
 
 const itinerariesControllers = require('../controllers/itinerariesControllers');
-const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary} = itinerariesControllers
+const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary,giveLike} = itinerariesControllers
 
 const usersControllers = require('../controllers/usersControllers');
 const {signUp, logIn, verifyMail, verifyToken} = usersControllers
@@ -32,6 +32,9 @@ Router.route('/addMultipleCity')
 Router.route('/itineraries')
 .get(getItineraries)
 .post(addItinerary)
+
+Router.route('/itineraries/like')
+.post(giveLike)
 
 Router.route('/itineraries/:id') 
 .delete(removeItinerary)
