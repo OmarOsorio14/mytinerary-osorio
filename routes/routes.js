@@ -5,7 +5,7 @@ const citiesControllers = require('../controllers/citiesControllers');
 const {getCities, getOneCity, addCity, modifyCity, removeCity, addMultipleCity,addItineraryToCity} = citiesControllers
 
 const itinerariesControllers = require('../controllers/itinerariesControllers');
-const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary} = itinerariesControllers
+const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary} = itinerariesControllers
 
 const usersControllers = require('../controllers/usersControllers');
 const {signUp, logIn, verifyMail, verifyToken} = usersControllers
@@ -23,6 +23,8 @@ Router.route('/cities/:id')
 .get(getOneCity)
 
 Router.route('/cities/newitinerary/:id').put(addItineraryToCity)
+Router.route('/cities/newactivity/:id').put(addActivityToItinerary)
+
 
 Router.route('/addMultipleCity')
 .post(addMultipleCity)

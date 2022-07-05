@@ -7,9 +7,13 @@ const itinerarySchema = new mongoose.Schema({
 	price: {type: Number, max: 5, required: true},
 	duration: {type: String, required: true},
 	hashtags: {type: Array, required: true},
-	likes: {type: Number, default: 0},
-	activities: {type: Array, required: true},
-	city: {type: mongoose.Types.ObjectId, ref:"cities", required: true},	
+	likes: {type:Array},
+	activities: [{type: mongoose.Types.ObjectId, ref:"activities"}],
+	city: {type: mongoose.Types.ObjectId, ref:"cities", required: true},
+	comments: [{
+		comment: {type: String},
+		userId: {type:mongoose.Types.ObjectId, ref:'users'}
+}]
 })
 
 const Itinerary = mongoose.model('itineraries', itinerarySchema)

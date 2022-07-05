@@ -43,7 +43,7 @@ export default function SignUp() {
 				last_name: event.target["last_name"].value.trim(),
 				email: event.target["email"].value.trim(),
 				password: event.target["password"].value.trim(),
-				country: event.target["country"].value.trim(),
+				country: countrySelected,
 				photo: event.target["photo"].value.trim(),
 				from: "form-signUp"
 		}
@@ -59,11 +59,9 @@ export default function SignUp() {
 		})
 		}
 	}
-
-
 	return (
-		<>
-			<form className="p-4 m-4 md:mx-40 md:my-20 bg-slate-50 text-left rounded-lg" onSubmit={handleSubmit}>
+		<div className="flex items-center justify-center"  >
+			<form className="p-4 my-4 md:mx-12 md:my-20  bg-slate-50 text-left rounded-lg max-w-3xl" onSubmit={handleSubmit}>
 				{countrySelected !== "" 
 				? <>
 						<div className="relative z-0 w-full mb-6 group">
@@ -133,7 +131,7 @@ export default function SignUp() {
 				</div>}
 			</form>
 			
-		</>
+		</div>
 
 	)
 }

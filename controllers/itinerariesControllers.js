@@ -31,7 +31,7 @@ const itinerariesControllers = {
 
 	},
 	addItinerary: async(req,res)=>{
-		const {name,userName,userPicture,price,duration,hashtags,likes,activities, city} = req.body.data
+		const {name,userName,userPicture,price,duration,hashtags, city} = req.body.data
 		let itinerary
 		let error = null
 		try{
@@ -42,8 +42,6 @@ const itinerariesControllers = {
 				price:price,
 				duration:duration,
 				hashtags:hashtags,
-				likes:likes,
-				activities:activities,
 				city:city,
 			}).save()
 		}catch(err){error = err}
@@ -77,6 +75,26 @@ const itinerariesControllers = {
 		}catch (err) {error = err}
 		res.json({
 			response: error ? 'ERROR' : itinerary,
+			success: error ? false : true,
+			error: error
+		})
+	},
+	addActivityToItinerary: async(req,res)=>{
+		const idItinerary = req.params.id
+		const idActivity = req.body.data.idActivity;
+		let itinerary
+		let itinerarydb
+		let error = null
+		try {
+			itinerary = await Itinerary.findOne({_id: idItinerary})
+			itinerary.activities = itinerary.activities.push(idActivity)
+			itinerarydb = await Itinerary.findOneAndUpdate({_id:idItinerary},itinerary,{new: true})
+		}catch (err) {
+			error = err
+			console.error(error)
+		}
+		res.json({
+			response: error ? 'ERROR' : itinerarydb,
 			success: error ? false : true,
 			error: error
 		})
