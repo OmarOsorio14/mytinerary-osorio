@@ -24,7 +24,6 @@ function Detail() {
 	},[])
 
 	const city = useSelector(store => store.cityReducer.oneCity)
-
 	const makeRefs = () => {
 		setRefs(city.itineraries.reduce((acc, value) => {
 			acc[value._id] = React.createRef();
@@ -54,7 +53,7 @@ function Detail() {
 	return (
 			<>
 				<img className="w-full max-h-52 object-cover overflow-hidden h-52 shadow-lg shadow-lime-500/50" src={city.image} alt="" />
-				<div className="mx-0 md:mx-16 my-4 p-4">
+				<div className="mx-0 md:mx-16 my-4 p-2">
 					<p className=' text-5xl mb-2 text-left font-bold'>{city.name}</p>
 					<p className=' text-3xl mb-2 text-left font-bold'>Description</p>
 					<p className=' text-left'>{city.description}</p>

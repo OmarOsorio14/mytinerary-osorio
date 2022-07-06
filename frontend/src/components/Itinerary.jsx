@@ -6,12 +6,12 @@ import Carousel from './Carousel'
 import Alert from './Alert'
 import {useDispatch,useSelector} from 'react-redux'
 import itineraryActions from '../redux/actions/itineraryActions'
+import CommentsBox from './CommentsBox'
 
 export default function Itinerary({itinerary}) {
 	const dispatch = useDispatch()
 	const user = useSelector(store => store.userReducer.user)
 	const [showMore, setShowMore] = useState(false);
-
 	const handleLike = ()=>{
 		if(user){
 			dispatch(itineraryActions.giveLike({
@@ -51,13 +51,20 @@ let price = [];
 				<p className="flex items-center justify-center"><ClockIcon className='w-6'/>{itinerary.duration}</p>
 				<p className="text-xl font-medium text-indigo-500">{itinerary.userName}</p>
 			</div>
-			<button type="button" className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-2" onClick={() => setShowMore(!showMore)}>
+			<button type="button" className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 shadow-lg shadow-purple-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-2" onClick={() => setShowMore(!showMore)}>
 			{showMore ? "See Less" : "See More"}</button>
-			{showMore ? (itinerary.activities.length !== 0 ? 
-			<Carousel title="Activities" data={itinerary.activities} load={1} redirection={false}/> 
+			{showMore ? (itinerary.activities.length !== 0 ?
+			<>
+				<Carousel title="Activities" data={itinerary.activities} load={1} redirection={false}/>
+				<CommentsBox id={itinerary._id} comments={itinerary.comments}/>
+			</>
+			
 			: <Alert type="info" title="this itinerary doesn't have activities yet" message="At the moment we do not have any activity available for this itinerary, we are still preparing them for you to live the best experiences"/>): ""}
 			
 
 		</div>
 	)
 }
+
+
+	

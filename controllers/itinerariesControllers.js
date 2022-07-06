@@ -120,6 +120,28 @@ const itinerariesControllers = {
 			success: error ? false : true,
 			error: error
 	})
-}
+},
+AddComment: async(req,res)=>{
+	const {idItinerary, userId, message} = req.body.data
+	let itinerary
+	let itinerarydb
+	let error = null
+	try{
+		itinerary = await Itinerary.findOne({_id: idItinerary})
+		itinerary.comments.push({
+			comment: message,
+			userId: userId
+		})
+		itinerarydb = await Itinerary.findOneAndUpdate({_id:idItinerary},itinerary,{new: true})
+
+
+	}catch (err) {error = err
+	console.error(err)}
+	res.json({
+		response: error ? 'ERROR' : itinerarydb,
+		success: error ? false : true,
+		error: error
+})
+},
 }
 module.exports = itinerariesControllers

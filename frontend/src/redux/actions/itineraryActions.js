@@ -15,9 +15,17 @@ const itineraryActions = {
 					toast.error("for this action you must be logged in first")
 				}else{
 				const res = await axios.post('http://localhost:4000/api/itineraries/like', {data})
-				}
-				
-				
+				}	
+			}
+		},
+		AddComment: (data)=>{
+			return async(dispatch, getState) => {
+				if(data==="not logged"){
+					toast.error("for this action you must be logged in first")
+				}else{
+				const res = await axios.post('http://localhost:4000/api/itineraries/comment', {data})
+				console.log(res)
+				}	
 			}
 		}
 }

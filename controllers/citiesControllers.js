@@ -20,7 +20,7 @@ const citiesControllers = {
 		try {
 			city = await City.findOne({_id: id}).populate({
 																										path: 'itineraries',
-																										populate: { path: 'activities' }
+																										populate: [{ path: 'activities'},{ path: 'comments.userId'}]
 		 																							});
 		}catch (err) {
 			error = err
