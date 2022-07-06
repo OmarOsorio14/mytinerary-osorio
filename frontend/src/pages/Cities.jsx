@@ -9,7 +9,7 @@ function Cities() {
 	const dispatch = useDispatch()
 	const cities = useSelector(store => store.cityReducer.cities)
 	const filter = useSelector(store => store.cityReducer.filter)
-const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 	useEffect(()=>{
 		window.scrollTo(0, 0)
 		if(cities.length !== 0 ){

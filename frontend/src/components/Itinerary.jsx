@@ -14,12 +14,9 @@ export default function Itinerary({itinerary}) {
 	const [showMore, setShowMore] = useState(false);
 	const handleLike = ()=>{
 		if(user){
-			dispatch(itineraryActions.giveLike({
-				id: itinerary._id,
-				userid: user.id
-			}))
+			dispatch(itineraryActions.giveLikeOrDislike(itinerary._id))
 		}else{
-			dispatch(itineraryActions.giveLike("not logged"))
+			dispatch(itineraryActions.giveLikeOrDislike("not logged"))
 		}
 	}
 	
@@ -45,9 +42,10 @@ let price = [];
 			<div className="flex justify-end mt-4 justify-around">
 				<p className="flex items-center justify-center">
 					<button onClick={()=>handleLike()}>
-						{user !== null ? itinerary.likes.indexOf(user.id) !== -1 ? <HeartIcon className='w-6 text-red-500'/> : <HeartIcon className='w-6'/>
+						{user !== null ? itinerary.likes.includes(user.id) ? <HeartIcon className='w-6 text-red-500'/> : <HeartIcon className='w-6'/>
 						:<HeartIcon className='w-6'/>}
-					</button>{itinerary.likes.length}</p>
+					</button>{itinerary.likes.length}
+				</p>
 				<p className="flex items-center justify-center"><ClockIcon className='w-6'/>{itinerary.duration}</p>
 				<p className="text-xl font-medium text-indigo-500">{itinerary.userName}</p>
 			</div>

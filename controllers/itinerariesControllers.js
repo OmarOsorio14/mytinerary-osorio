@@ -99,20 +99,19 @@ const itinerariesControllers = {
 			error: error
 		})
 	},
-	giveLike: async(req,res)=>{
-		const idItinerary = req.body.data.id
-		const idUser = req.body.data.userid
+	giveLikeOrDislike: async(req,res)=>{
+		const idItinerary = req.params.id
+		const idUser = req.user.id
 		let itinerary
 		let itinerarydb
 		let error = null
 		try{
 			itinerary = await Itinerary.findOne({_id: idItinerary})
-			if(itinerary.likes.indexOf(idUser) === -1){
-				itinerary.likes.push(idUser)
+			if(itinerary.likes.includes(idUser)){
+				itinerarydb = await	Itinerary.findOneAndUpdate({ _id: idItinerary }, { $pull: { likes: idUser } }, { new: true })
 			}else{
-				itinerary.likes.splice(itinerary.likes.indexOf(idUser), 1)
+				itinerarydb = await Itinerary.findOneAndUpdate({ _id: idItinerary }, { $push: { likes: idUser } }, { new: true })
 			}
-			itinerarydb = await Itinerary.findOneAndUpdate({_id:idItinerary},itinerary,{new: true})
 		}catch (err) {error = err
 		console.error(err)}
 		res.json({
@@ -122,26 +121,48 @@ const itinerariesControllers = {
 	})
 },
 AddComment: async(req,res)=>{
-	const {idItinerary, userId, message} = req.body.data
-	let itinerary
-	let itinerarydb
+	const {idItinerary, message} = req.body.data
+	const user = req.user.id
 	let error = null
 	try{
-		itinerary = await Itinerary.findOne({_id: idItinerary})
-		itinerary.comments.push({
-			comment: message,
-			userId: userId
-		})
-		itinerarydb = await Itinerary.findOneAndUpdate({_id:idItinerary},itinerary,{new: true})
-
-
+		const newComment = await Itinerary.findOneAndUpdate({_id:idItinerary}, {$push: {comments: {comment: message, userId: user, date: Date.now()}}}, {new: true})
+		res.json({
+			response: error ? 'ERROR' : newComment,
+			success: error ? false : true,
+			error: error
+	})	
 	}catch (err) {error = err
 	console.error(err)}
-	res.json({
-		response: error ? 'ERROR' : itinerarydb,
-		success: error ? false : true,
-		error: error
-})
+
 },
+UpdateComment: async(req,res)=>{
+	const {idComment,message} = req.body.data
+	try {
+			const newComment = await Itinerary.findOneAndUpdate({"comments._id":idComment}, {$set: {"comments.$.comment": message,"comments.$.date": Date.now() }}, {new: true})
+			res.json({ success: true, response:{newComment}, message:"comment updated successfully" })
+
+	}
+	catch (error) {
+			console.log(error)
+			res.json({ success: true, message: "something went wrong try again later" })
+	}
+
+},
+DeleteComment: async(req,res)=>{
+	const idComment = req.params.id
+	let error = null
+	try{
+		const deleteComment = await Itinerary.findOneAndUpdate({"comments._id":idComment}, {$pull: {comments: {_id: idComment}}}, {new: true})
+		res.json({
+			response: error ? 'ERROR' : deleteComment,
+			success: true,
+			error: error
+		})
+		}
+	catch (err) {error = err
+	console.error(err)}
+	
+},
+
 }
 module.exports = itinerariesControllers

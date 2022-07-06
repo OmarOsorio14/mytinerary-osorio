@@ -9,12 +9,17 @@ const itineraryActions = {
 				dispatch({type:'getItineraries', payload:res.data.response.itineraries})
 			}
 		},
-		giveLike: (data)=>{
+		giveLikeOrDislike: (id)=>{
 			return async(dispatch, getState) => {
-				if(data==="not logged"){
+				if(id==="not logged"){
 					toast.error("for this action you must be logged in first")
 				}else{
-				const res = await axios.post('http://localhost:4000/api/itineraries/like', {data})
+					const token = localStorage.getItem('token')
+					const res = await axios.put(`http://localhost:4000/api/itineraries/like/${id}`, {}, {
+						headers: {
+								'Authorization': `Bearer ${token}`
+									}
+						})
 				}	
 			}
 		},
@@ -23,10 +28,55 @@ const itineraryActions = {
 				if(data==="not logged"){
 					toast.error("for this action you must be logged in first")
 				}else{
-				const res = await axios.post('http://localhost:4000/api/itineraries/comment', {data})
-				console.log(res)
+					const token = localStorage.getItem('token')
+					const res = await axios.post('http://localhost:4000/api/itineraries/comment', {data}, {
+						headers: {
+								'Authorization': `Bearer ${token}`
+									}
+						})
+					if(res.data.success){
+						toast.success("thanks for comment")
+					}else{
+						toast.error("something went wrong try again later")
+					}
+				}	
+			}
+		},
+		
+		UpdateComment: (data)=>{
+			return async(dispatch, getState) => {
+				if(data==="not logged"){
+					toast.error("for this action you must be logged in first")
+				}else{
+				const token = localStorage.getItem('token')
+				const res = await axios.put('http://localhost:4000/api/itineraries/comment', {data}, {
+					headers: {
+							'Authorization': `Bearer ${token}`
+								}
+					})
+				if(res.data.success){
+					toast.success(res.data.message)
+				}else{
+					toast.error(res.data.message)
+				}
+				}	
+			}
+		},
+		DeleteComment: (id)=>{
+			return async(dispatch, getState) => {
+				const token = localStorage.getItem('token')
+				const res = await axios.put(`http://localhost:4000/api/itineraries/comment/${id}`, {}, {
+					headers: {
+							'Authorization': `Bearer ${token}`
+								}
+					})
+					if(res.data.success){
+						toast.success("comment deleted successfully")
+					}else{
+						toast.error("something went wrong try again later")
+					}
 				}	
 			}
 		}
-}
+
 export default itineraryActions

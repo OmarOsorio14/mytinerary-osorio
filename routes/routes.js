@@ -5,7 +5,7 @@ const citiesControllers = require('../controllers/citiesControllers');
 const {getCities, getOneCity, addCity, modifyCity, removeCity, addMultipleCity,addItineraryToCity} = citiesControllers
 
 const itinerariesControllers = require('../controllers/itinerariesControllers');
-const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary,giveLike,AddComment} = itinerariesControllers
+const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary,giveLikeOrDislike,AddComment,DeleteComment, UpdateComment} = itinerariesControllers
 
 const usersControllers = require('../controllers/usersControllers');
 const {signUp, logIn, verifyMail, verifyToken} = usersControllers
@@ -33,11 +33,15 @@ Router.route('/itineraries')
 .get(getItineraries)
 .post(addItinerary)
 
-Router.route('/itineraries/like')
-.post(giveLike)
+Router.route('/itineraries/like/:id')
+.put(passport.authenticate('jwt',{session:false}), giveLikeOrDislike)
 
 Router.route('/itineraries/comment')
-.post(AddComment)
+.post(passport.authenticate('jwt',{session:false}), AddComment)
+.put(passport.authenticate('jwt',{session:false}), UpdateComment)
+
+Router.route('/itineraries/comment/:id')
+.put(passport.authenticate('jwt',{session:false}), DeleteComment)
 
 Router.route('/itineraries/:id') 
 .delete(removeItinerary)
