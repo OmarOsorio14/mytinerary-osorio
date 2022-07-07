@@ -57,7 +57,11 @@ let price = [];
 				<CommentsBox id={itinerary._id} comments={itinerary.comments}/>
 			</>
 			
-			: <Alert type="info" title="this itinerary doesn't have activities yet" message="At the moment we do not have any activity available for this itinerary, we are still preparing them for you to live the best experiences"/>): ""}
+			:<>
+				<Alert type="info" title="this itinerary doesn't have activities yet" message="At the moment we do not have any activity available for this itinerary, we are still preparing them for you to live the best experiences"/>
+				<CommentsBox id={itinerary._id} comments={itinerary.comments}/>
+			</>)
+			: ""}
 			
 
 		</div>

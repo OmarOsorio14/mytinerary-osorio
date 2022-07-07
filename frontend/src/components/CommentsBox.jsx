@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import itineraryActions from '../redux/actions/itineraryActions'
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid'
-
+import Moment from 'react-moment';
 
 
 export default function CommentsBox({id, comments}) {
@@ -17,6 +17,7 @@ export default function CommentsBox({id, comments}) {
 				idItinerary: id,
 				message: event.target["message"].value
 			}))
+			event.target["message"].value = ""
 		}else{
 			dispatch(itineraryActions.AddComment("not logged"))
 		}
@@ -39,22 +40,22 @@ export default function CommentsBox({id, comments}) {
 			{comments.map(comment =>{
 				if(user===null ||comment.userId._id !==user.id ){
 
-					return(<div className="flex items-end mb-6">
+					return(<div key={comment._id} className="flex items-end mb-6">
 									<div className="flex p-2 flex-col space-y-2 text-base mx-2 order-2 items-start text-left bg-white rounded-lg rounded-bl-none">
 										<p className=' text-teal-600 font-bold'>{comment.userId.username}</p>
 										<p className=" inline-block ">{comment.comment}</p>
-										<p className="text-xs text-gray-900 font-bold">{comment.date}</p>
+										<Moment fromNow className='text-gray-800 font-bold text-xs'>{comment.date}</Moment>
 									</div>
 									<img src={comment.userId.photo} alt="My profile" className="w-10 h-10 rounded-full order-1" />
 	 							</div>)
 				}else{
-					return(<div className="flex place-content-end mb-6">
+					return(<div key={comment._id} className="flex place-content-end mb-6">
 									<div className="flex flex-col space-y-2 text-base mx-2">
 										{comment._id !== commentEdit 
 										?<>
 											<div className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-teal-300 text-left">
 												<p>{comment.comment}</p>
-												<p className="text-xs text-gray-900 font-bold">{comment.date}</p>
+												<Moment fromNow className='text-gray-800 font-bold text-xs'>{comment.date}</Moment>
 											</div>
 											<div className='flex'>
 											<button onClick={() => dispatch(itineraryActions.DeleteComment(comment._id))}>
@@ -80,7 +81,7 @@ export default function CommentsBox({id, comments}) {
 			
 
 			<form className='flex w-full' onSubmit={handleSendComment}>
-    		<label for="message" className="sr-only">Your message</label>
+    		<label htmlFor="message" className="sr-only">Your message</label>
  				<textarea id="message" name="message" rows="1" className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" 
 				placeholder={user === null ? "You must be logged in first" : "Your message..."} disabled={user === null}></textarea>
         <button type="submit" className="inline-flex justify-center p-2 text-blue-600 cursor-pointer hover:bg-blue-100">
