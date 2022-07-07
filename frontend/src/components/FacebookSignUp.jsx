@@ -12,7 +12,6 @@ export default function FacebookSignUp({country}) {
 
 	const responseFacebook = (res) => {
 		const arrayName = res.name.split(" ")
-				console.log(res)
 				dispatch(userActions.signUpUser({
 					username: res.name,
 					first_name: arrayName[0],

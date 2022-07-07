@@ -1,11 +1,11 @@
 import axios from "axios";
 import toast from 'react-hot-toast';
-
+import {url} from '../../url'
 
 const itineraryActions = {
 		getItineraries: ()=>{
 			return async(dispatch, getState) => {
-				const res = await axios.get('http://localhost:4000/api/itineraries')
+				const res = await axios.get(`${url}api/itineraries`)
 				dispatch({type:'getItineraries', payload:res.data.response.itineraries})
 			}
 		},
@@ -15,7 +15,7 @@ const itineraryActions = {
 					toast.error("for this action you must be logged in first")
 				}else{
 					const token = localStorage.getItem('token')
-					const res = await axios.put(`http://localhost:4000/api/itineraries/like/${id}`, {}, {
+					const res = await axios.put(`${url}api/itineraries/like/${id}`, {}, {
 						headers: {
 								'Authorization': `Bearer ${token}`
 									}
@@ -29,7 +29,7 @@ const itineraryActions = {
 					toast.error("for this action you must be logged in first")
 				}else{
 					const token = localStorage.getItem('token')
-					const res = await axios.post('http://localhost:4000/api/itineraries/comment', {data}, {
+					const res = await axios.post(`${url}api/itineraries/comment`, {data}, {
 						headers: {
 								'Authorization': `Bearer ${token}`
 									}
@@ -49,7 +49,7 @@ const itineraryActions = {
 					toast.error("for this action you must be logged in first")
 				}else{
 				const token = localStorage.getItem('token')
-				const res = await axios.put('http://localhost:4000/api/itineraries/comment', {data}, {
+				const res = await axios.put(`${url}api/itineraries/comment`, {data}, {
 					headers: {
 							'Authorization': `Bearer ${token}`
 								}
@@ -65,7 +65,7 @@ const itineraryActions = {
 		DeleteComment: (id)=>{
 			return async(dispatch, getState) => {
 				const token = localStorage.getItem('token')
-				const res = await axios.put(`http://localhost:4000/api/itineraries/comment/${id}`, {}, {
+				const res = await axios.put(`${url}api/itineraries/comment/${id}`, {}, {
 					headers: {
 							'Authorization': `Bearer ${token}`
 								}

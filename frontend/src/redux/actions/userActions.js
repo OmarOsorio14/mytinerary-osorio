@@ -1,10 +1,11 @@
 import axios from "axios";
 import toast from 'react-hot-toast';
+import {url} from '../../url'
 
 const userActions = {
 		signUpUser: (userData)=>{
 			return async(dispatch, getState) => {
-				const res = await axios.post('http://localhost:4000/api/auth/signup', {userData})
+				const res = await axios.post(`${url}api/auth/signup`, {userData})
 				
 				if(res.data.success){
 					toast.success(res.data.message);
@@ -21,7 +22,7 @@ const userActions = {
 		},
 		logInUser: (logedUser)=>{
 			return async(dispatch, getState) => {
-				const res = await axios.post('http://localhost:4000/api/auth/login', {logedUser})
+				const res = await axios.post(`${url}api/auth/login`, {logedUser})
 
 				if(res.data.success){
 					localStorage.setItem('token', res.data.response.token)
@@ -41,7 +42,7 @@ const userActions = {
 		},
 		verifyToken: (token) => {
 			return async (dispatch, getState) => {
-					const user = await axios.get('http://localhost:4000/api/auth/loginToken', {headers: {'Authorization': 'Bearer '+token}} )
+					const user = await axios.get(`${url}api/auth/loginToken`, {headers: {'Authorization': 'Bearer '+token}} )
 					if (user.data.success) {
 						dispatch({ type: 'logInUser', payload: user.data.response });
 						toast.success(user.data.message)

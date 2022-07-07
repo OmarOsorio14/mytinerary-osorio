@@ -1,9 +1,10 @@
 import axios from "axios";
+import {url} from '../../url'
 
 const cityActions = {
 		getCities: ()=>{
 			return async(dispatch, getState) => {
-				const res = await axios.get('http://localhost:4000/api/cities')
+				const res = await axios.get(`${url}api/cities`)
 				dispatch({type:'getCities', payload:res.data.response.cities})
 			}
 		},
@@ -15,7 +16,7 @@ const cityActions = {
 		getOneCity: (id)=>{
 			return async(dispatch, getState) => {
 				try {
-					const res = await axios.get(`http://localhost:4000/api/cities/${id}`)
+					const res = await axios.get(`${url}api/cities/${id}`)
 					dispatch({type:'oneCity', payload:res.data.response})
 			}catch (err) {
 					console.error(err)

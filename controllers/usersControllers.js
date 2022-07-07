@@ -154,7 +154,7 @@ const usersControllers = {
 		if (user) {
 			user.verification = true
 			await user.save()
-			res.redirect("http://localhost:3000/login")
+			res.redirect(`${process.env.FRONTEND_URL}login`)
 		}
 		else {res.json({
 			success: false,

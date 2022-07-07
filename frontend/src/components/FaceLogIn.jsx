@@ -10,7 +10,6 @@ export default function FaceLogIn() {
 	const dispatch = useDispatch()
 
 	const responseFacebook = (res) => {
-				console.log(res)
 				dispatch(userActions.logInUser({
 					email: res.email,
 					password: res.id,

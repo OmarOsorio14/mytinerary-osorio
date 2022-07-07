@@ -5,7 +5,10 @@ const citiesControllers = require('../controllers/citiesControllers');
 const {getCities, getOneCity, addCity, modifyCity, removeCity, addMultipleCity,addItineraryToCity} = citiesControllers
 
 const itinerariesControllers = require('../controllers/itinerariesControllers');
-const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary,giveLikeOrDislike,AddComment,DeleteComment, UpdateComment} = itinerariesControllers
+const {getItineraries, getOneItinerary, addItinerary, modifyItinerary, removeItinerary, addActivityToItinerary,giveLikeOrDislike} = itinerariesControllers
+
+const commentsControllers = require('../controllers/commentsControllers');
+const {AddComment,DeleteComment, UpdateComment} = commentsControllers
 
 const usersControllers = require('../controllers/usersControllers');
 const {signUp, logIn, verifyMail, verifyToken} = usersControllers
